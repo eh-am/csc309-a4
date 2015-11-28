@@ -1,0 +1,39 @@
+
+<div class="row">
+  <h1>Register</h1>
+
+  <form class"col s12" name="newUserForm" novalidate ng-submit="save(user, newUserForm.$valid)">
+    <div class="row">
+      <div class="col s12 input-field">
+          <label for="display_name" class="active">Email:</label>
+          <input type="email" ng-model="user.email">
+      </div>
+    </div>
+
+
+    <div>
+      <h5>Password</h5>
+      <div class="row">
+        <div class="col s12 input-field">
+          <label for="password1" class="active">Password</label>
+          <input type="password" ng-model="user.password" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 input-field">
+          <label for="password2" class="active">Password Confirmation</label>
+          <input type="password" ng-model="user.passwordConfirm" data-match="user.password" name="passwordConfirm" required>
+        </div>
+      </div>    
+    </div>
+
+    <div ng-show="newUserForm.passwordConfirm.$error.match" class="error-message">Passwords do not match!</div>    
+
+    <input type="submit" value="Register" ng-disabled="newUserForm.$invalid" class="waves-effect waves-light btn-large">
+    <a href="#" class="btn-large waves-effect waves-light" ng-click="$back()">Back</a>
+  </form>
+
+  <div ng-show="submissionSuccess">User updated successfully!</div>
+  <div ng-show="errmsg" class="error-message">{{ errmsg }}</div>
+
+</div>

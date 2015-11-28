@@ -1,0 +1,88 @@
+
+<div class="row">
+  <h1>Profile Edit</h1>
+
+  <div class="col s12">
+    <label for="">email</label>
+    <p>{{ user.email }}</p>
+  </div>
+
+
+    <div class="col s4 m4 l3">
+    <div class="card">
+      <div class="card-image">
+        <img ng-show="user.profile_image" src="{{user.profile_image}}">
+        <img ng-hide="user.profile_image" gravatar-src="user.email" gravatar-size="400">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <form class"col s12" name="userEditForm" novalidate ng-submit="update(user, userEditForm.$valid)" enctype="multipart/form-data">
+    <div class="row">
+      <div class="col s12 input-field">
+          <label for="display_name" ng-class="{'active' : user.display_name }">Display Name:</label>
+          <input type="text" ng-model="user.display_name" >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 file-field input-field">
+          <div class="btn">
+            <span>Profile Image</span>
+            <input type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+    accept="image/*" ngf-max-size="10MB" ngf-fix-orientation="false">
+          </div>
+          <div class="file-path-wrapper">
+            <input type="text" class="file-path validate" value={{user.profile_image}} placeholder="Profile Image (if none is provided, a Gravatar based on your e-mail will be used):">
+          </div>
+          
+            <!-- <input type="text" ng-model="user.profile_image"> -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 input-field">
+        <textarea class="materialize-textarea" ng-maxlength=500 ng-model="user.description"></textarea>
+        <label for="description" ng-class="{'active' : user.description }">Description</label>
+      </div>
+    </div>
+
+
+    <div class="row" ng-show="isSuperAdmin">
+      <div class="col s12 input-field">
+        <input type="radio" ng-model="user.role" value="regular" name="role" id="regular"><label for="regular">Regular User</label>
+        <input type="radio" ng-model="user.role" value="admin" name="role" id="admin" ><label for="admin">Admin</label>
+      </div>
+    </div>
+
+    <br />
+    <br />
+    <div>
+      <h5>Password update</h5>
+      <div class="row">
+        <div class="col s12 input-field">
+          <label for="password1" class="active">New Password</label>
+          <input type="password" ng-model="user.password">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 input-field">
+          <label for="password2" class="active">Repeat New Password</label>
+          <input type="password" ng-model="user.passwordConfirm" data-match="user.password" name="passwordConfirm">
+        </div>
+      </div>    
+    </div>
+
+
+     <div ng-show="userEditForm.passwordConfirm.$error.match">Passwords do not match!</div>
+
+    <input type="submit" value="Edit" ng-disabled="userEditForm.$invalid" class="waves-effect waves-light btn-large">
+    <a href="#" class="btn-large waves-effect waves-light" ng-click="$back()">Back</a>
+  </form>
+
+  <div class="success-message" ng-show="submissionSuccess"><h4><i class="material-icons dp48">done</i> User updated successfully!</h4></div>
+</div>

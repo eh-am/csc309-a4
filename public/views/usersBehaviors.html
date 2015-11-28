@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col s12 m6 left">
+    <h1>Users Behaviors</h1>
+  </div>
+  <div class="col s12 m6 right">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title black-text" >Interesting User Behaviors</span>
+        <ul class="collection ">
+          <li class="collection-item">
+            The Most Viewed Page is <a href="{{ iub.mostViewedPage.page }}">{{ iub.mostViewedPage.page }}</a> with 
+          {{ iub.mostViewedPage.accesses }} access(es).            
+          </li>
+          <li class="collection-item">
+            The Most Frequent User is
+          {{iub.mostFrequentUser.user}} with {{ iub.mostFrequentUser.accesses }} access(es).
+          </li>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<h4>Logs</h4>
+
+<dir-pagination-controls template-url="views/paginationTemplate.html">
+</dir-pagination-controls>
+
+<div class="row">
+  <div class="col s12 input-field">
+      <label ng-class="{'active' : query }">Search for email (eg. a@a.a):</label>
+      <input type="text" ng-model="query.user_email" >
+  </div>
+</div>
+
+
+<ul dir-paginate="ub in usersBehaviors | filter : query  | itemsPerPage : 5 ">
+  <li class="collection z-depth-2">
+      <div class="collection-item"><label for="">User:</label> {{ ub.user_email }} </div> 
+    <div class="collection-item"><label for="">Accessed At:</label> {{ ub.accessed_at | amDateFormat:'h:mm:ss a, DD/MM/YYYY' }} </div> 
+    <div class="collection-item"><label for="">IP:</label>{{ ub.ip }}</div>
+    <div class="collection-item"><label for="">Page:</label> <a href="{{ ub.page }}">{{ ub.page }}</a></div>
+    <div class="collection-item"><label for="">Device</label>: {{ ub.deviceType }}</div>
+    <div class="collection-item"><label>Os:</label> {{ ub.os }}</div>
+    <div class="collection-item"><label>Screensize:</label> {{ ub.screenSize.width }} X {{ ub.screenSize.height }}</div>
+    <div class="collection-item"><label>Browser:</label> {{ ub.browser.name }} {{ ub.browser.version }}</div>
+    <div class="collection-item"><label for="">Location:</label> {{ ub.latitude}}, {{ub.longitude}}</div>
+  </li>
+</ul>
+
+<dir-pagination-controls template-url="views/paginationTemplate.html">
+</dir-pagination-controls>

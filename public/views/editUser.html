@@ -1,0 +1,49 @@
+
+<div class="row">
+  <h1>Profile</h1>
+  <div>
+    <label for="">email</label>
+    <h5>{{ user.email }}</h5>
+  </div>
+  <form class"col s12" name="userEditForm" novalidate ng-submit="update(user, userEditForm.$valid)">
+    <div class="row">
+      <div class="col s12 input-field">
+          <label for="display_name" class="active">Display Name:</label>
+          <input type="text" ng-model="user.display_name">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 input-field">
+        <textarea class="materialize-textarea" ng-maxlength=500 ng-model="user.description"></textarea>
+        <label for="description" class="active">Description</label>
+      </div>
+    </div>
+
+    <br />
+    <br />
+    <div>
+      <h5>Password update</h5>
+      <div class="row">
+        <div class="col s12 input-field">
+          <label for="password1" class="active">New Password</label>
+          <input type="password" ng-model="user.password">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 input-field">
+          <label for="password2" class="active">Repeat New Password</label>
+          <input type="password" ng-model="user.passwordConfirm" data-match="user.password" name="passwordConfirm">
+        </div>
+      </div>    
+    </div>
+
+
+     <div ng-show="userEditForm.passwordConfirm.$error.match">Passwords do not match!</div>
+
+    <input type="submit" value="Edit" ng-disabled="userEditForm.$invalid" class="waves-effect waves-light btn-large">
+    <a href="#" class="btn-large waves-effect waves-light" ng-click="$back()">Back</a>
+  </form>
+
+  <div ng-show="submissionSuccess">User updated successfully!</div>
+</div>

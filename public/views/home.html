@@ -1,0 +1,27 @@
+<h1>Home</h1>
+<div class="row">
+  <div class="col s9">
+    <div ng-show="isLoggedIn">
+      
+        <img ng-show="currentUser.profile_image" src="{{ currentUser.profile_image}}" class="circle left" width="100" height="100">
+    <img ng-hide="currentUser.profile_image" gravatar-src="currentUser.email" gravatar-size="100" class="circle left">
+        <h4 class="welcome">Welcome, <br />{{ currentUser.display_name || currentUser.email }}</h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col s9">
+        <h4>What do you want to do?</h4>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col s12">
+    <a ng-show="isLoggedIn" class="waves-effect waves-light btn-large" href="/users"><span>Check all users</span></a>
+    <a ng-hide="isLoggedIn" class="waves-effect waves-light btn-large" href="/register" > <i class="material-icons left">add</i> Signup</a>
+    <a ng-hide="isLoggedIn" class="waves-effect waves-light btn-large" href="/login" ><i class="material-icons left">input</i> Login</a>
+    <a ng-show="isLoggedIn" class="waves-effect waves-light btn-large" href="/logout" >Logout</a>
+  </div>
+</div>
